@@ -5,8 +5,10 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Trophy, Coins, User, BarChart3, Settings, Scissors, Mountain, Hand, Star } from "lucide-react";
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
 // 타입 정의
 type Choice = "rock" | "paper" | "scissors";
