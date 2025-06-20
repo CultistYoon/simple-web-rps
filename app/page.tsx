@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import type { ElementType } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,7 +9,6 @@ import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Trophy, Coins, User, BarChart3, Settings, Scissors, Mountain, Hand, Star } from "lucide-react";
 import * as React from "react";
-import type { LucideIcon } from "lucide-react";
 
 // 타입 정의
 type Choice = "rock" | "paper" | "scissors";
@@ -48,8 +47,6 @@ const SKINS = [
   { id: "diamond", name: "다이아몬드 손", levelRequired: 10, rarity: "epic" },
   { id: "rainbow", name: "무지개 손", levelRequired: 50, rarity: "legendary" },
 ];
-
-const LEVEL_WIN_REQUIREMENTS = [0, 1, 3, 7, 13, 20, 50];
 
 export default function RockPaperScissorsGame() {
   const [gameStats, setGameStats] = useState<GameStats>({
@@ -218,20 +215,6 @@ export default function RockPaperScissorsGame() {
       setIsPlaying(false);
       setTimeout(() => setRewardAnimation(null), 2000);
     }, 1500);
-  };
-
-  const buySkin = (skinId: string, price: number) => {
-    if (gameStats.gold >= price && !gameStats.unlockedSkins.includes(skinId)) {
-      setGameStats((prev) => ({
-        ...prev,
-        gold: prev.gold - price,
-        unlockedSkins: [...prev.unlockedSkins, skinId],
-      }));
-    } else if (gameStats.unlockedSkins.includes(skinId)) {
-      alert("이미 잠금 해제된 스킨입니다!");
-    } else {
-      alert("골드가 부족합니다!");
-    }
   };
 
   const selectSkin = (skinId: string) => {
