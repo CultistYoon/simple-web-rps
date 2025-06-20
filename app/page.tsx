@@ -84,7 +84,16 @@ export default function RockPaperScissorsGame() {
     const savedStats = localStorage.getItem("rps-game-stats");
     if (savedStats) setGameStats(JSON.parse(savedStats));
     const savedPattern = localStorage.getItem("rps-ai-pattern");
-    if (savedPattern) setAiPattern(JSON.parse(savedPattern));
+    if (savedPattern) {
+      const parsed = JSON.parse(savedPattern);
+      // playerWinChoices가 없거나, rock/paper/scissors가 없으면 기본값으로 보정
+      parsed.playerWinChoices = {
+        rock: parsed.playerWinChoices?.rock ?? 0,
+        paper: parsed.playerWinChoices?.paper ?? 0,
+        scissors: parsed.playerWinChoices?.scissors ?? 0,
+      };
+      setAiPattern(parsed);
+    }
     const hasVisitedBefore = localStorage.getItem("rps-has-visited");
     if (SHOW_PLAN_ON_FIRST_LOAD && !hasVisitedBefore) {
       setShowPlanPopup(true);
@@ -231,10 +240,11 @@ export default function RockPaperScissorsGame() {
   const getAiMostFrequentChoiceHint = () => {
     const choices: Choice[] = ["rock", "paper", "scissors"];
     let mostFrequent = choices[0];
-    let maxCount = aiPattern.playerWinChoices[choices[0]];
+    let maxCount = aiPattern.playerWinChoices?.[choices[0]] ?? 0;
     for (let i = 1; i < choices.length; i++) {
-      if (aiPattern.playerWinChoices[choices[i]] > maxCount) {
-        maxCount = aiPattern.playerWinChoices[choices[i]];
+      const count = aiPattern.playerWinChoices?.[choices[i]] ?? 0;
+      if (count > maxCount) {
+        maxCount = count;
         mostFrequent = choices[i];
       }
     }
