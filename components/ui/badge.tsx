@@ -2,13 +2,14 @@ import { cn } from "@/lib/utils";
 import React from "react";
 
 const badgeVariants = {
-  default: "bg-gray-200 text-gray-800",
-  secondary: "bg-blue-100 text-blue-700",
+  default: "bg-blue-500 text-white",
+  secondary: "bg-gray-200 text-gray-800",
   outline: "border border-gray-300 text-gray-700 bg-white",
+  destructive: "bg-red-500 text-white",
 };
 
 type BadgeProps = React.HTMLAttributes<HTMLSpanElement> & {
-  variant?: "default" | "secondary" | "outline";
+  variant?: "default" | "secondary" | "outline" | "destructive";
 };
 
 export function Badge({ className, variant = "default", ...props }: BadgeProps) {
