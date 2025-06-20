@@ -8,7 +8,7 @@ import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Trophy, Coins, User, BarChart3, Settings, Scissors, Mountain, Hand, Star } from "lucide-react";
 import * as React from "react";
-import { cn } from "@/lib/utils";
+import type { LucideIcon } from "lucide-react";
 
 // 타입 정의
 type Choice = "rock" | "paper" | "scissors";
@@ -34,7 +34,7 @@ interface AiPattern {
 }
 
 // 상수 정의
-const CHOICES: { value: Choice; icon: any; label: string; color: string }[] = [
+const CHOICES: { value: Choice; icon: LucideIcon; label: string; color: string }[] = [
   { value: "rock", icon: Mountain, label: "바위", color: "text-gray-600" },
   { value: "paper", icon: Hand, label: "보", color: "text-blue-600" },
   { value: "scissors", icon: Scissors, label: "가위", color: "text-red-600" },
